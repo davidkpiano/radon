@@ -1,11 +1,13 @@
 var React = require('react');
 var RadonStyleSheet = exports.RadonStyleSheet = require('./components/RadonStyleSheet.js');
+var Radon = require('./core/Radon');
 
 class Foo extends React.Component {
     render() {
-        // var style = Radon.style('hey ya');
-
-        return <div>hello guys</div>;
+        return <div onClick={this._handleOnClick}>{"Click me and I'll turn blue."}</div>;
+    }
+    _handleOnClick() {
+        Radon.style('blue');
     }
 }
 

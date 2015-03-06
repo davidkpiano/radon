@@ -1,4 +1,5 @@
 var React = require('react');
+var Radon = require('../core/Radon');
 
 class RadonStyleSheet extends React.Component {
     constructor(props) {
@@ -6,6 +7,14 @@ class RadonStyleSheet extends React.Component {
         this.state = {
             style: 'div { background: green; }'
         };
+    }
+
+    componentDidMount() {
+        Radon.subscribe(this._onUpdate, this);
+    }
+
+    _onUpdate(result) {
+        this.setState({ style: `div { background: ${result}; }` });
     }
 
     render() {

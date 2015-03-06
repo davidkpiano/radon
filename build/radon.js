@@ -48,21 +48,24 @@
 
 	var React = __webpack_require__(2);
 	var RadonStyleSheet = exports.RadonStyleSheet = __webpack_require__(155);
+	var Radon = __webpack_require__(156);
 
-	var ____Class8 = React.Component;for (var ____Class8____Key in ____Class8) {
-	    if (____Class8.hasOwnProperty(____Class8____Key)) {
-	        Foo[____Class8____Key] = ____Class8[____Class8____Key];
+	var ____ClassJ = React.Component;for (var ____ClassJ____Key in ____ClassJ) {
+	    if (____ClassJ.hasOwnProperty(____ClassJ____Key)) {
+	        Foo[____ClassJ____Key] = ____ClassJ[____ClassJ____Key];
 	    }
-	}var ____SuperProtoOf____Class8 = ____Class8 === null ? null : ____Class8.prototype;Foo.prototype = Object.create(____SuperProtoOf____Class8);Foo.prototype.constructor = Foo;Foo.__superConstructor__ = ____Class8;function Foo() {
-	    "use strict";if (____Class8 !== null) {
-	        ____Class8.apply(this, arguments);
+	}var ____SuperProtoOf____ClassJ = ____ClassJ === null ? null : ____ClassJ.prototype;Foo.prototype = Object.create(____SuperProtoOf____ClassJ);Foo.prototype.constructor = Foo;Foo.__superConstructor__ = ____ClassJ;function Foo() {
+	    "use strict";if (____ClassJ !== null) {
+	        ____ClassJ.apply(this, arguments);
 	    }
 	}
 	Foo.prototype.render = function () {
 	    "use strict";
-	    // var style = Radon.style('hey ya');
-
-	    return React.createElement("div", null, "hello guys");
+	    return React.createElement("div", { onClick: this.$Foo_handleOnClick }, "Click me and I'll turn blue.");
+	};
+	Foo.prototype.$Foo_handleOnClick = function () {
+	    "use strict";
+	    Radon.style("blue");
 	};
 
 	console.log(React.render(React.createElement(Foo, null), document.getElementById("foo")));
@@ -17694,19 +17697,30 @@
 	"use strict";
 
 	var React = __webpack_require__(2);
+	var Radon = __webpack_require__(156);
 
-	var ____Class9 = React.Component;for (var ____Class9____Key in ____Class9) {
-	    if (____Class9.hasOwnProperty(____Class9____Key)) {
-	        RadonStyleSheet[____Class9____Key] = ____Class9[____Class9____Key];
+	var ____ClassG = React.Component;for (var ____ClassG____Key in ____ClassG) {
+	    if (____ClassG.hasOwnProperty(____ClassG____Key)) {
+	        RadonStyleSheet[____ClassG____Key] = ____ClassG[____ClassG____Key];
 	    }
-	}var ____SuperProtoOf____Class9 = ____Class9 === null ? null : ____Class9.prototype;RadonStyleSheet.prototype = Object.create(____SuperProtoOf____Class9);RadonStyleSheet.prototype.constructor = RadonStyleSheet;RadonStyleSheet.__superConstructor__ = ____Class9;
+	}var ____SuperProtoOf____ClassG = ____ClassG === null ? null : ____ClassG.prototype;RadonStyleSheet.prototype = Object.create(____SuperProtoOf____ClassG);RadonStyleSheet.prototype.constructor = RadonStyleSheet;RadonStyleSheet.__superConstructor__ = ____ClassG;
 	function RadonStyleSheet(props) {
 	    "use strict";
-	    ____Class9.call(this, props);
+	    ____ClassG.call(this, props);
 	    this.state = {
 	        style: "div { background: green; }"
 	    };
 	}
+
+	RadonStyleSheet.prototype.componentDidMount = function () {
+	    "use strict";
+	    Radon.subscribe(this.$RadonStyleSheet_onUpdate, this);
+	};
+
+	RadonStyleSheet.prototype.$RadonStyleSheet_onUpdate = function (result) {
+	    "use strict";
+	    this.setState({ style: "div { background: " + result + "; }" });
+	};
 
 	RadonStyleSheet.prototype.render = function () {
 	    "use strict";
@@ -17716,6 +17730,31 @@
 	React.render(React.createElement(RadonStyleSheet, null), document.getElementById("style"));
 
 	module.exports = RadonStyleSheet;
+
+/***/ },
+/* 156 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	function Radon() {
+	    "use strict";
+	    this.handlers = [];
+	}
+	Radon.prototype.style = function (foo) {
+	    "use strict";
+	    for (var i = 0; i < this.handlers.length; i++) {
+	        var handler = this.handlers[i];
+
+	        handler.call(null, foo);
+	    }
+	};
+	Radon.prototype.subscribe = function (handler, context) {
+	    "use strict";
+	    this.handlers.push(handler.bind(context));
+	};
+
+	module.exports = new Radon();
 
 /***/ }
 /******/ ]);
