@@ -2,7 +2,7 @@
   "name": "radon",
   "version": "0.0.1",
   "description": "React component styling that harnesses the power of native CSS.",
-  "main": "index.js",
+  "main": "modules/index.js",
   "peerDependencies": {
     "react": ">=0.13.0-beta.1"
   },
@@ -25,5 +25,16 @@
   "homepage": "https://github.com/davidkpiano/radon",
   "dependencies": {
     "lodash": "^3.3.1"
+  },
+  "devDependencies": {
+    "babel": "^4.6.6",
+    "babel-core": "^4.6.6",
+    "babel-loader": "^4.0.0",
+    "install": "^0.1.8",
+    "jsx-loader": "^0.12.2",
+    "npm": "^2.6.1",
+    "react": "^0.13.0-beta.1",
+    "webpack": "^1.7.0",
+    "webpack-dev-server": "^1.7.0"
   }
 }
